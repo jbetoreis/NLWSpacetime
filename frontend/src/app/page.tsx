@@ -1,9 +1,13 @@
+import { cookies } from 'next/headers'
 import EmptyMemories from '@/components/EmptyMemories'
-import Footer from '@/components/footer'
+import Footer from '@/components/Footer'
 import HeroSection from '@/components/HeroSection'
 import SignSection from '@/components/SignSection'
+import { Profile } from '@/components/Profile'
 
 export default function Home() {
+  const isAuthenticated = cookies().has('token')
+
   return (
     <main className="grid min-h-screen grid-cols-2">
       {/* Left Section */}
@@ -14,7 +18,8 @@ export default function Home() {
         <div className="absolute bottom-0 right-1 top-0 w-2 bg-stripes" />
 
         {/* Sign In */}
-        <SignSection />
+        {isAuthenticated ? <Profile /> : <SignSection />}
+
         {/* Hero */}
         <HeroSection />
 
